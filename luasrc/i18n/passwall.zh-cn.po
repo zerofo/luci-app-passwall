@@ -1,0 +1,96 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Server"
+msgstr "服务器"
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "enable"
+msgstr "启用/开关"
+
+msgid "http port"
+msgstr "http 端口"
+
+msgid "https port"
+msgstr "https 端口"
+
+msgid "Ports that need to redirect http traffic(No more than 6)"
+msgstr "需要代理的http端口(数量不超过6个)"
+
+msgid "Ports that need to redirect https traffic(No more than 7)"
+msgstr "需要代理的http端口(数量不超过7个)"
+
+msgid "enable ipv6 address return"
+msgstr "启用ipv6地址返回"
+
+msgid "dns cache size"
+msgstr "dns缓存大小"
+
+msgid "remote udp dns server"
+msgstr "dns服务器"
+
+msgid "examples: 223.5.5.5:53 or 127.0.0.1:1053"
+msgstr "例如: 223.5.5.5:53 or 127.0.0.1:1053"
+
+msgid "bogus NX domain results"
+msgstr "虚假地址返回"
+
+msgid "Filter out contaminated return IP addresses. examples: 127.0.0.1/8 or 1.2.3.4"
+msgstr "过滤掉有污染的返回ip地址。例如: 127.0.0.1/8 or 1.2.3.4"
+
+msgid "Black Domain List"
+msgstr "域名黑名单"
+
+msgid "Proxy Server Forward List"
+msgstr "代理服务器转发列表"
+
+msgid "Name"
+msgstr "名称"
+
+msgid "Proxy Type"
+msgstr "代理协议类型"
+
+msgid "direct"
+msgstr "直连"
+
+msgid "IP"
+msgstr "IP地址"
+
+msgid "Port"
+msgstr "端口"
+
+msgid "Authentication"
+msgstr "身份验证"
+
+msgid "User"
+msgstr "用户名"
+
+msgid "Password"
+msgstr "密码"
+
+msgid "DnsResolve"
+msgstr "本地DNS解析"
+
+msgid "Whether to perform local DNS resolution, it is only recommended that direct connection and SOCKS4 line be set to true."
+msgstr "是否执行本地dns解析,只建议直连、socks4 线路设置为 true 。"
+
+msgid "Sleep"
+msgstr "等待时间"
+
+msgid "Time to wait before using this line (in milliseconds)"
+msgstr "使用本线路前等待的时间(单位毫秒)"
+
+msgid "CorrectDelay"
+msgstr "修正延迟"
+
+msgid "The non-SS protocol does not need to be set. The SS protocol is recommended to be set to 50-100"
+msgstr "非 ss 协议不用设置，ss 协议建议设置为50-100"
+
+msgid "WhiteList"
+msgstr "域名白名单"
+
+msgid "Domain"
+msgstr "域名"
+

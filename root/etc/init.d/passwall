@@ -1,0 +1,161 @@
+#!/bin/bash /etc/rc.common
+
+START=99
+STOP=99
+
+switch=$(uci get passwall.@global[0].switch)
+port=$(uci get passwall.@global[0].port)
+ports=$(uci get passwall.@global[0].ports)
+
+module_list="
+  transocks-wong
+  TcpRoute2
+  smartdns
+"
+
+tcp2_w()(
+  cat >/tmp/TcpRoute2.toml<<EOF
+addr="127.0.0.1:1025"
+PreHttpPorts=[${port//\ /,}]
+PreHttpsPorts=[${ports//\ /,}]
+EOF
+  i=0
+  while true; do
+    uci get passwall.@proxy[$i]||break
+    name=$(uci get passwall.@proxy[$i].name)
+    proxyurl=$(uci get passwall.@proxy[$i].proxy)
+    address=$(uci get passwall.@proxy[$i].address)
+    port=$(uci get passwall.@proxy[$i].port)
+    user=$(uci get passwall.@proxy[$i].user)
+    pass=$(uci get passwall.@proxy[$i].password)
+    dns=$(uci get passwall.@proxy[$i].resolve)
+    sleep=$(uci get passwall.@proxy[$i].sleep)
+    delay=$(uci get passwall.@proxy[$i].delay)
+    white=$(uci get passwall.@proxy[$i].white)
+    filename=$(date +%s) #date +%s | sha256sum | base64 | head -c 32 ; echo
+    if [ "$proxyurl" -a "$address" -a "$port" ]; then
+      if [ "$user" -a "$pass" ]; then
+	    server="$user:$pass@$address:$port"
+	  else
+	    server="$address:$port"
+	  fi
+	  [ "$dns" ]&&dns="true"||dns="false"
+	  [ "$name" ]&&filename="$name"
+      [ -z "$sleep" ]&&sleep=0
+      [ -z "$delay" ]&&delay=0
+	  cat >>/tmp/TcpRoute2.toml<<EOF
+[[UpStreams]]
+Name="$name"
+ProxyUrl="$proxyurl://$server"
+DnsResolve=$dns
+Sleep=$sleep
+CorrectDelay=$delay
+EOF
+      if [ "$white" ]; then
+	    cat >>/tmp/TcpRoute2.toml<<EOF
+[[UpStreams.Whitelist]]
+Path="/tmp/$filename.txt"
+UpdateInterval="24h"
+Type="suffix"
+EOF
+        if [ -s /tmp/$filename.txt ]; then
+		  rm -f /tmp/$filename.txt
+		fi
+		for j in $white ; do
+	      echo $j >>/tmp/$filename.txt
+	    done
+	  fi
+    fi
+	unset -v name proxyurl address port user pass server dns sleep delay white filename
+	((i++))
+  done
+)
+
+dns_w()(
+  cache=$(uci get passwall.@global[0].cache)
+  ipv6=$(uci get passwall.@global[0].ipv6)
+  dns=$(uci get passwall.@global[0].server)
+  bogus=$(uci get passwall.@global[0].bogus)
+  if [ "$dns" ]; then
+    [ -z "$cache" ]&&cache=0
+	[ -z "$ipv6" ]&&ipv6="yes"||ipv6="no"
+	cat >/tmp/smartdns.conf<<EOF
+server-name smartdns
+bind 127.0.0.1:1053
+bind [::1]:1053
+tcp-idle-time 15
+cache-size $cache
+serve-expired yes
+serve-expired-ttl 10
+speed-check-mode ping,tcp:80,tcp:443
+force-AAAA-SOA $ipv6
+log-level error
+EOF
+	for i in $dns ; do
+	  echo "server $i" >>/tmp/smartdns.conf
+	done
+	for i in $bogus ; do
+	  echo "bogus-nxdomain $i" >>/tmp/smartdns.conf
+	done
+	echo -e "$(cat /etc/black.list)\n"|while IFS= read -r line; do
+	  [ "$line" ]&&echo "address $line" >>/tmp/smartdns.conf
+	done
+  fi
+)
+
+clear_rules()(
+  iptables -t nat -D PREROUTING -j passwall
+  iptables -t nat -F passwall
+  iptables -t nat -X passwall
+)
+
+start_up()(
+  if [ $switch -eq 1 ]; then
+    (transocks-wong --listener-addr-port=0.0.0.0:1024 --socks5-addr-port=127.0.0.1:1025 > /dev/null 2>&1 &)
+	tcp2_w
+    (TcpRoute2 -config /tmp/TcpRoute2.toml -daemon > /dev/null 2>&1 &)
+	dns_w
+    smartdns -c /tmp/smartdns.conf
+  else
+    shut_down
+  fi
+)
+
+shut_down()(
+  for i in $module_list; do
+    kill $(pidof $i) 2> /dev/null
+  done
+)
+
+ss_nat()(
+  if [ $switch -eq 1 ]; then
+    iptables -t nat -N passwall
+    iptables -w -t nat -A passwall -d 192.168/16 -j ACCEPT
+    iptables -w -t nat -A passwall -p tcp -m multiport --dport ${port//\ /,} -j REDIRECT --to-ports 1024
+	iptables -w -t nat -A passwall -p tcp -m multiport --dport ${ports//\ /,} -j REDIRECT --to-ports 1024
+    iptables -w -t nat -A PREROUTING -j passwall
+  else
+    clear_rules
+  fi
+);
+
+stop()
+{
+	clear_rules
+	shut_down
+}
+
+start()
+{
+	stop
+	start_up
+	ss_nat
+}
+
+restart()
+{
+	clear_rules
+    shut_down
+	start_up
+    ss_nat
+}
