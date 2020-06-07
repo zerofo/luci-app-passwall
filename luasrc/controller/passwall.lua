@@ -7,7 +7,7 @@ function index()
   entry({"admin", "services", "passwall"}, firstchild(), "PassWall Plus+", 99).dependent = true
   entry({"admin", "services", "passwall", "main"},cbi("passwall/main"), _("Main"), 10).leaf = true
   entry({"admin", "services", "passwall", "proxy"},cbi("passwall/proxy"), _("Server"), 15).leaf = true
-  entry({"admin", "services", "passwall","run"},call("act_status")).leaf = true
+  entry({"admin", "services", "passwall", "run"},call("act_status")).leaf = true
 end
 
 function act_status()
