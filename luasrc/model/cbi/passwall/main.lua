@@ -1,12 +1,12 @@
 -- 第一个为配置文件 默认路径是"/etc/config"+passwall
 -- m = Map("passwall", translate("PassWall Plus+"), translate("On this page we can learn how the .lua work"))
-m = Map("passwall", translate("PassWall Plus+"))
+m = Map("passwall", translate("PassWall Plus+"), translate("Self-use of the proxy script, I do not bear any consequences. <br/>Please visit https://github.com/yiguihai/luci-app-passwall for more help"))
 -- 第二个为配置文件具体项 global
 -- s = m:section(TypedSection, "global", translate("Script Configuration"))
 
 m:section(SimpleSection).template = "passwall/status"
 
-s = m:section(TypedSection, "global", translate("Self-use of the proxy script, I do not bear any consequences. <br/>Please visit https://github.com/yiguihai/luci-app-passwall for more help"))
+s = m:section(TypedSection, "global")
 s.anonymous = true
 s.addremove = false
 
@@ -27,7 +27,7 @@ s:tab("dns", translate("DNS"))
 
 o = s:taboption("dns", Flag, "ipv6", translate("IPV6"))
 o.datatype = "enable"
-o.description = translate("enable ipv6 address return")
+o.description = translate("ipv6 address return")
 
 o = s:taboption("dns", Value, "cache", translate("dns cache size"))
 o.datatype = "max(4096)"

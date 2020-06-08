@@ -28,8 +28,8 @@ msgstr "需要代理的HTTP端口"
 msgid "Ports that need to redirect https traffic"
 msgstr "需要代理的HTTPS端口"
 
-msgid "enable ipv6 address return"
-msgstr "启用IPV6地址返回"
+msgid "ipv6 address return"
+msgstr "IPV6地址返回"
 
 msgid "dns cache size"
 msgstr "DNS缓存大小"
