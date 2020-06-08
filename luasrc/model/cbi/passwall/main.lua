@@ -6,7 +6,7 @@ m = Map("passwall", translate("PassWall Plus+"))
 
 m:section(SimpleSection).template = "passwall/status"
 
-s = m:section(TypedSection, "global")
+s = m:section(TypedSection, "global", translate("Self-use of the proxy script, I do not bear any consequences. <br/>Please visit https://github.com/yiguihai/luci-app-passwall for more help"))
 s.anonymous = true
 s.addremove = false
 
@@ -17,11 +17,11 @@ o.datatype = "enable"
 
 o = s:taboption("main", DynamicList, "port", translate("http port"))
 o.datatype = "port"
-o.description = translate("Ports that need to redirect http traffic(No more than 6)")
+o.description = translate("Ports that need to redirect http traffic")
 
 o = s:taboption("main", DynamicList, "ports", translate("https port"))
 o.datatype = "port"
-o.description = translate("Ports that need to redirect https traffic(No more than 7)")
+o.description = translate("Ports that need to redirect https traffic")
 
 s:tab("dns", translate("DNS"))
 

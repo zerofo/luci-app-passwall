@@ -3,12 +3,12 @@ config global
 	option cache '1024'
 	list bogus '127.0.0.1/8'
 	list ports '443'
-	list port '80'
-	list port '8080'
-	option daemon '1'
-	option switch '1'
 	list server '202.103.224.68:53'
 	list server '8.8.8.8:53'
+	option switch '0'
+	list port '80'
+	list port '3128'
+	list port '8080'
 
 config proxy
 	option proxy 'direct'
@@ -16,6 +16,8 @@ config proxy
 	option resolve '1'
 	option address '0.0.0.0'
 	option delay '0'
+	option port '0000'
+	option name 'direct'
 	list white '126.net'
 	list white '163.com'
 	list white 'netease.com'
@@ -25,9 +27,6 @@ config proxy
 	list white 'ixigua.com'
 	list white 'byteimg.com'
 	list white 'pstatp.com'
-	list white 'ip.cn'
-	option port '0000'
-	option name 'direct'
 
 config proxy
 	option delay '0'

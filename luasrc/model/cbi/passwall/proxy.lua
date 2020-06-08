@@ -36,7 +36,7 @@ o.datatype = "string"
 s:tab("settings", translate("Settings"))
 o = s:taboption("settings", Flag, "resolve", translate("DnsResolve"))
 o.datatype = "enable"
-o.description = translate("Whether to perform local DNS resolution, it is only recommended that direct connection and SOCKS4 line be set to true.")
+o.description = translate("Whether to perform local DNS resolution, only direct connection and SOCKS4 are recommended")
 
 o = s:taboption("settings", Value, "sleep", translate("Sleep"))
 o.datatype = "max(30000)"

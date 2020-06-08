@@ -1,8 +1,14 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
+msgid "Main"
+msgstr "首页"
+
 msgid "Server"
 msgstr "服务器"
+
+msgid "Self-use of the proxy script, I do not bear any consequences. <br/>Please visit https://github.com/yiguihai/luci-app-passwall for more help"
+msgstr "自用的代理脚本，本人不承担任何后果。 <br/>请访问 https://github.com/yiguihai/luci-app-passwall 获取更多帮助"
 
 msgid "Settings"
 msgstr "设置"
@@ -11,25 +17,25 @@ msgid "enable"
 msgstr "启用/开关"
 
 msgid "http port"
-msgstr "http 端口"
+msgstr "HTTP 端口"
 
 msgid "https port"
-msgstr "https 端口"
+msgstr "HTTPS 端口"
 
-msgid "Ports that need to redirect http traffic(No more than 6)"
-msgstr "需要代理的http端口(数量不超过6个)"
+msgid "Ports that need to redirect http traffic"
+msgstr "需要代理的HTTP端口"
 
-msgid "Ports that need to redirect https traffic(No more than 7)"
-msgstr "需要代理的http端口(数量不超过7个)"
+msgid "Ports that need to redirect https traffic"
+msgstr "需要代理的HTTPS端口"
 
 msgid "enable ipv6 address return"
-msgstr "启用ipv6地址返回"
+msgstr "启用IPV6地址返回"
 
 msgid "dns cache size"
-msgstr "dns缓存大小"
+msgstr "DNS缓存大小"
 
 msgid "remote udp dns server"
-msgstr "dns服务器"
+msgstr "DNS服务器"
 
 msgid "examples: 223.5.5.5:53 or 127.0.0.1:1053"
 msgstr "例如: 223.5.5.5:53 or 127.0.0.1:1053"
@@ -38,7 +44,7 @@ msgid "bogus NX domain results"
 msgstr "虚假地址返回"
 
 msgid "Filter out contaminated return IP addresses. examples: 127.0.0.1/8 or 1.2.3.4"
-msgstr "过滤掉有污染的返回ip地址。例如: 127.0.0.1/8 or 1.2.3.4"
+msgstr "过滤掉有污染的返回IP地址。例如: 127.0.0.1/8 or 1.2.3.4"
 
 msgid "Black Domain List"
 msgstr "域名黑名单"
@@ -73,8 +79,8 @@ msgstr "密码"
 msgid "DnsResolve"
 msgstr "本地DNS解析"
 
-msgid "Whether to perform local DNS resolution, it is only recommended that direct connection and SOCKS4 line be set to true."
-msgstr "是否执行本地dns解析,只建议直连、socks4 线路设置为 true 。"
+msgid "Whether to perform local DNS resolution, only direct connection and SOCKS4 are recommended"
+msgstr "是否执行本地DNS解析,只建议直连、socks4"
 
 msgid "Sleep"
 msgstr "等待时间"

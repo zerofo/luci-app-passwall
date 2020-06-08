@@ -21,7 +21,7 @@ PreHttpsPorts=[${ports//\ /,}]
 EOF
   i=0
   while true; do
-    uci get passwall.@proxy[$i]||break
+    uci get passwall.@proxy[$i] >/dev/null 2>&1||break
     name=$(uci get passwall.@proxy[$i].name)
     proxyurl=$(uci get passwall.@proxy[$i].proxy)
     address=$(uci get passwall.@proxy[$i].address)
@@ -147,7 +147,6 @@ stop()
 
 start()
 {
-	stop
 	start_up
 	ss_nat
 }
