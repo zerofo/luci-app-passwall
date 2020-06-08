@@ -1,7 +1,5 @@
 # passwall plus +
 
-[预编译ipk](https://github.com/yiguihai/luci-app-passwall/releases)
-
 将以前写的[fuckgfw](https://github.com/yiguihai/fuckgfw)脚本改写为luci界面控制了，自用
 先编译好po2lmo然后使用其将po汉化文件转换为lmo再编译就可以使用了
 
