@@ -5,10 +5,10 @@ config global
 	list ports '443'
 	list server '202.103.224.68:53'
 	list server '8.8.8.8:53'
-	option switch '0'
 	list port '80'
 	list port '3128'
 	list port '8080'
+	option switch '0'
 
 config proxy
 	option proxy 'direct'
@@ -29,7 +29,6 @@ config proxy
 	list white 'pstatp.com'
 
 config proxy
-	option delay '0'
 	option proxy 'socks5'
 	option name 'shadowsocks'
 	option address '127.0.0.1'
@@ -50,5 +49,6 @@ config proxy
 	list white 'googlevideo.com'
 	list white 'jav321.com'
 	list white 'twimg.com'
-	option sleep '170'
+	option delay '50'
+	option sleep '115'
 
