@@ -49,6 +49,6 @@ config proxy
 	list white 'googlevideo.com'
 	list white 'jav321.com'
 	list white 'twimg.com'
-	option delay '50'
+	option delay '0'
 	option sleep '115'
 
