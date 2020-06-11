@@ -50,5 +50,5 @@ config proxy
 	list white 'jav321.com'
 	list white 'twimg.com'
 	option delay '0'
-	option sleep '115'
+	option sleep '175'
 
