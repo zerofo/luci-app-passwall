@@ -8,7 +8,7 @@ include $(INCLUDE_DIR)/package.mk
 
 LUCI_TITLE:=LuCI support for TcpRoute2
 LUCI_PKGARCH:=all
-LUCI_DEPENDS:=+bash +libustream-openssl 
+LUCI_DEPENDS:=+bash +libustream-openssl +luci-compat
 
 include $(TOPDIR)/feeds/luci/luci.mk
 
