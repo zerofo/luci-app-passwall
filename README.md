@@ -11,7 +11,8 @@
 
 提供1053端口防止dns污染。可作为dnsmasq上游，主要是针对运营商返回 127.0.0.1 的污染，如 rfa.org jav321.com 还有域名黑名单等功能
 
-
+## TODO
+使用ipt2socks代替transocks-wong或者等待TcpRoute2更新
 ### 展示图
 <img src="https://github.com/yiguihai/luci-app-passwall/raw/master/view/1.png" alt="展示图" title="查看图片" />
 <img src="https://github.com/yiguihai/luci-app-passwall/raw/master/view/2.png" alt="展示图" title="查看图片" />
