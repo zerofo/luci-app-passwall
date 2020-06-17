@@ -51,8 +51,8 @@ config proxy
 	list white 'openwrt.org'
 	list white 'jav321.com'
 	list white 'twimg.com'
-      list white 'lvv2.com'
-      list white 'solidot.org'
+        list white 'lvv2.com'
+        list white 'solidot.org'
 	option delay '0'
 	option sleep '170'
 
