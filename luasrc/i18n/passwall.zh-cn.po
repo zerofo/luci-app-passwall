@@ -79,6 +79,12 @@ msgstr "密码"
 msgid "DnsResolve"
 msgstr "本地DNS解析"
 
+msgid "Block"
+msgstr "仅通过白名单"
+
+msgid "Prohibit all domain names except whitelist"
+msgstr "禁止除白名单外的所有域名使用本代理"
+
 msgid "Whether to perform local DNS resolution, only direct connection and SOCKS4 are recommended"
 msgstr "是否执行本地DNS解析,只建议直连、socks4"
 

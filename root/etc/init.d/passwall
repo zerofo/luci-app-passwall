@@ -36,6 +36,7 @@ EOF
     user=$(uci get passwall.@proxy[$i].user)
     pass=$(uci get passwall.@proxy[$i].password)
     dns=$(uci get passwall.@proxy[$i].resolve)
+    block=$(uci get passwall.@proxy[$i].block)
     sleep=$(uci get passwall.@proxy[$i].sleep)
     delay=$(uci get passwall.@proxy[$i].delay)
     white=$(uci get passwall.@proxy[$i].white)
@@ -72,8 +73,19 @@ EOF
           echo $j >>/tmp/$filename.txt
         done
       fi
+      if [ "$block" ]; then
+        cat >>/tmp/TcpRoute2.toml<<EOF
+[[UpStreams.Blacklist]]
+Path="/tmp/block.txt"
+UpdateInterval="24h"
+Type="regex"
+EOF
+        if [ ! -s /tmp/block.txt ]; then
+          echo '^.+$' >/tmp/block.txt
+        fi
+      fi
     fi
-    unset -v name proxyurl address port user pass server dns sleep delay white filename
+    unset -v name proxyurl address port user pass server dns block sleep delay white filename
     ((i++))
   done
 )

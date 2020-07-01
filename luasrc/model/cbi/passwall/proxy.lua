@@ -38,6 +38,10 @@ o = s:taboption("settings", Flag, "resolve", translate("DnsResolve"))
 o.datatype = "enable"
 o.description = translate("Whether to perform local DNS resolution, only direct connection and SOCKS4 are recommended")
 
+o = s:taboption("settings", Flag, "block", translate("Block"))
+o.datatype = "enable"
+o.description = translate("Prohibit all domain names except whitelist")
+
 o = s:taboption("settings", Value, "sleep", translate("Sleep"))
 o.datatype = "max(30000)"
 o.description = translate("Time to wait before using this line (in milliseconds)")
