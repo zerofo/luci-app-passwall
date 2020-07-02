@@ -97,8 +97,8 @@ dns_w()(
   bogus=$(uci get passwall.@global[0].bogus)
   if [ "$dns" ]; then
     [ -z "$cache" ]&&cache=0
-	[ -z "$ipv6" ]&&ipv6="yes"||ipv6="no"
-	cat >/tmp/smartdns.conf<<EOF
+    [ -z "$ipv6" ]&&ipv6="yes"||ipv6="no"
+    cat >/tmp/smartdns.conf<<EOF
 server-name smartdns
 bind 127.0.0.1:1053
 bind [::1]:1053
@@ -110,15 +110,15 @@ speed-check-mode ping,tcp:80,tcp:443
 force-AAAA-SOA $ipv6
 log-level error
 EOF
-	for i in $dns ; do
-	  echo "server $i" >>/tmp/smartdns.conf
-	done
-	for i in $bogus ; do
-	  echo "bogus-nxdomain $i" >>/tmp/smartdns.conf
-	done
-	echo -e "$(cat /etc/black.list)\n"|while IFS= read -r line; do
-	  [ "$line" ]&&echo "address $line" >>/tmp/smartdns.conf
-	done
+    for i in $dns ; do
+      echo "server $i" >>/tmp/smartdns.conf
+    done
+    for i in $bogus ; do
+      echo "bogus-nxdomain $i" >>/tmp/smartdns.conf
+    done
+    echo -e "$(cat /etc/black.list)\n"|while IFS= read -r line; do
+      [ "$line" ]&&echo "address $line" >>/tmp/smartdns.conf
+    done
   fi
 )
 
