@@ -7,3 +7,6 @@
 [submodule "build/transocks-wong"]
 	path = build/transocks-wong
 	url = https://github.com/wongsyrone/transocks-wong
+[submodule "build/ipt2socks"]
+	path = build/ipt2socks
+	url = https://github.com/zfl9/ipt2socks
