@@ -38,6 +38,6 @@ jobs:
         ls
         env
         uname -m
-        apt-get update
-        apt-get install upx
+        sudo apt-get update
+        sudo apt-get install upx
         upx -h
