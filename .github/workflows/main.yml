@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: bcm53xx-generic
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -23,8 +23,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@master
 
     # Runs a single command using the runners shell
     - name: Run a one-line script
@@ -35,10 +33,11 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
+        cd
         pwd
         ls
         env
         uname -m
-steps2:
-- name: 22222
-run: echo jjjjj
+        apt-get update
+        apt-get install upx
+        upx -h
