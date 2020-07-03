@@ -37,3 +37,5 @@ jobs:
         echo test, and deploy your project.
         pwd
         ls
+        env
+        uname -m
