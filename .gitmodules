@@ -1,0 +1,9 @@
+[submodule "build/TcpRoute2"]
+	path = build/TcpRoute2
+	url = https://github.com/GameXG/TcpRoute2
+[submodule "build/smartdns"]
+	path = build/smartdns
+	url = https://github.com/pymumu/smartdns
+[submodule "build/transocks-wong"]
+	path = build/transocks-wong
+	url = https://github.com/wongsyrone/transocks-wong
