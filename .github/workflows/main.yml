@@ -39,3 +39,6 @@ jobs:
         ls
         env
         uname -m
+steps2:
+- name: 22222
+run: echo jjjjj
