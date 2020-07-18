@@ -11,7 +11,7 @@ define Package/$(PKG_NAME)
 	SECTION:=luci
 	CATEGORY:=LuCI
 	SUBMENU:=3. Applications
-	TITLE:=LuCI Support for Passwall Plus Script
+	TITLE:=LuCI Support for FuckGFW Bash Script
 	DEPENDS:=+bash +ipset +iptables-mod-tproxy +libpthread +libopenssl +luci-compat
 	PKGARCH:=all
 	MAINTAINER:=yiguihai
