@@ -138,7 +138,7 @@ tcp-idle-time 15
 cache-size $cache
 serve-expired yes
 serve-expired-ttl 10
-speed-check-mode ping,tcp:80,tcp:443
+speed-check-mode tcp:443,tcp:80,ping
 force-AAAA-SOA $ipv6
 log-level error
 EOF
