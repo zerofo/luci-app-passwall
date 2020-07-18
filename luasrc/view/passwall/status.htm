@@ -1,0 +1,22 @@
+<script type="text/javascript">//<![CDATA[
+XHR.poll(3, '<%=url([[admin]], [[services]], [[passwall]], [[run]])%>', null,
+	function(x, data) {
+		var tb = document.getElementById('passwall_status');
+		if (data && tb) {
+			if (data.status) {
+				var links = '<em><b><font color=green>PassWall Plus <%:RUNNING%></font></b></em>';
+				tb.innerHTML = links;
+			} else {
+				tb.innerHTML = '<em><b><font color=red>PassWall Plus <%:NOT RUNNING%></font></b></em>';
+			}
+		}
+	}
+);
+//]]>
+</script>
+<style>.mar-10 {margin-left: 50px; margin-right: 10px;}</style>
+<fieldset class="cbi-section">
+	<p id="passwall_status">
+		<em><%:Collecting data...%></em>
+	</p>
+</fieldset>
