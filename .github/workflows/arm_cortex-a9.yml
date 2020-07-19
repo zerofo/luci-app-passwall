@@ -94,7 +94,7 @@ jobs:
         fi
         garch=${dirn2/toolchain-/}
         garch=${garch%_gcc*}
-        if [ "$garch"]; then
+        if [ "$garch" ]; then
           echo "#平台架构为 ${garch}"
         else
           echo "没有识别出平台架构!"
