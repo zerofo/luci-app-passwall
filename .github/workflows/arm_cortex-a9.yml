@@ -92,7 +92,7 @@ jobs:
           echo "没有识别出编译器存放文件夹!"
           exit 127
         fi
-        garch=${a/toolchain-/}
+        garch=${dirn2/toolchain-/}
         garch=${garch%_gcc*}
         if [ "$garch"]; then
           echo "#平台架构为 ${garch}"
