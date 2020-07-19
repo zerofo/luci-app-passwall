@@ -84,12 +84,20 @@ jobs:
         cd ${dirn1}
         echo "当前目录: ${dirn1}"
         for i in staging_dir/* ;do
-          [ ${i##*/} != "host" -a -d $i ]&&dirn2=${i##*/}
+          [[ ${i##*/} == "toolchain-"*_gcc* && -d $i ]]&&dirn2=${i##*/}
         done
         if [ ${dirn2} ]; then
           echo "#编译器存放文件夹 ${dirn2}"
         else
           echo "没有识别出编译器存放文件夹!"
+          exit 127
+        fi
+        garch=${a/toolchain-/}
+        garch=${garch%_gcc*}
+        if [ "$garch"]; then
+          echo "#平台架构为 ${garch}"
+        else
+          echo "没有识别出平台架构!"
           exit 127
         fi
         for i in staging_dir/${dirn2}/bin/*-gcc; do
@@ -176,7 +184,7 @@ jobs:
         mv /tmp/bin/* ../../root/usr/bin
         chmod -R +x ../../root/usr/bin
         #opkg print-architecture 查看平台架构
-        sed -i "s/PKGARCH:=all/PKGARCH:=arm_cortex-a9/g;s/PKG_RELEASE:=1/PKG_RELEASE:=2/g" ../../Makefile #需要修改
+        sed -i "s/PKGARCH:=all/PKGARCH:=$garch/g;s/PKG_RELEASE:=1/PKG_RELEASE:=2/g" ../../Makefile
         pushd ${dirn}/${dirn1}
         make package/luci-app-passwall-plus/compile -j${cores:=1}
         find bin/ -type f -name "*luci-app-passwall-plus*" | xargs -t -i mv -vf {} /tmp/ipk
