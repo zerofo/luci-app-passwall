@@ -101,7 +101,7 @@ jobs:
           exit 127
         fi
         for i in staging_dir/${dirn2}/bin/*-gcc; do
-          target_host=$(echo ${i##*/}|grep -oP "[A-Za-z0-9]+\-[A-Za-z0-9]+\-[A-Za-z0-9]+")
+          target_host=$(echo ${i##*/}|grep -oP "\w+\-\w+\-\w+")
         done
         if [ ${target_host} ]; then
           echo "#编译器平台为 ${target_host}"
