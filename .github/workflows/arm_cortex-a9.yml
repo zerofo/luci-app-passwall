@@ -63,7 +63,7 @@ jobs:
         
     - name: Prepare Toolchain
       run: |
-      # $(wget -qO- https://downloads.openwrt.org/snapshots/targets/bcm53xx/generic/ | grep -oP "openwrt\-sdk\-(\w|.|-)+?\.tar\.xz" | head -n 1)
+        #$(wget -qO- https://downloads.openwrt.org/snapshots/targets/bcm53xx/generic/ | grep -oP "openwrt\-sdk\-(\w|.|-)+?\.tar\.xz" | head -n 1)
         wget --no-check-certificate --quiet --continue --show-progress ${URL}
         [ $? -ne 0 ]&&echo "下载工具链失败!"&&exit 127
         tar xvJf openwrt-sdk-*.tar.xz
