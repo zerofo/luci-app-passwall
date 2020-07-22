@@ -96,16 +96,16 @@ jobs:
         garch=${dirn2/toolchain-/}
         garch=${garch%_gcc*}
         if [ "$garch" ]; then
-          echo "#平台架构为 ${garch}"
+          echo "#处理器平台架构为 ${garch}"
         else
-          echo "没有识别出平台架构!"
+          echo "没有识别出处理器平台架构!"
           exit 127
         fi
         for i in staging_dir/${dirn2}/bin/*-gcc; do
           target_host=$(echo ${i##*/}|grep -oP "\w+\-\w+\-\w+")
         done
         if [ ${target_host} ]; then
-          echo "#编译器平台为 ${target_host}"
+          echo "#编译器目标主机 ${target_host}"
         else
           echo "没有识别出编译器!"
           exit 127
