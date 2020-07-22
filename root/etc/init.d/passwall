@@ -37,7 +37,7 @@ fi
 for i in $module_list; do
   type $i >/dev/null 2>&1
   [ $? -eq 127 ]&&exit $?
-  [ ! -x /usr/bin/$i ]&&chmod +x /usr/bin/$i
+  [ ! -x /usr/bin/$i ]&&chmod +x /usr/bin/$i 2>/dev/null
 done
 
 revert_dns()(
