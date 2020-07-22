@@ -28,14 +28,14 @@ ipv4_lan="
 "
 
 if [ -s /etc/config/passwall ]; then
-  switch=$(uci get passwall.@global[0].switch)
+  switch=$(uci get passwall.@global[0].switch 2>/dev/null)
   port=$(uci get passwall.@global[0].port)
   ports=$(uci get passwall.@global[0].ports)
   cores=$(cat /proc/cpuinfo|grep processor|wc -l)
 fi
 
 for i in $module_list; do
-  type $i 2> /dev/null
+  type $i >/dev/null 2>&1
   [ $? -eq 127 ]&&exit $?
   [ ! -x /usr/bin/$i ]&&chmod +x /usr/bin/$i
 done
