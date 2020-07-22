@@ -206,13 +206,13 @@ stop()
 {
   clear_rules
   shut_down
-}
+} 2>/dev/null
 
 start()
 {
   start_up
   ss_nat
-}
+} 2>/dev/null
 
 restart()
 {
@@ -220,4 +220,4 @@ restart()
   shut_down
   start_up
   ss_nat
-}
+} 2>/dev/null
