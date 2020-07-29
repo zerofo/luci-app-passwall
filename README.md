@@ -16,17 +16,16 @@
     
 使用了以下开源项目
     
-1. [ipt2socks](https://github.com/zfl9/ipt2socks)，透明代理   
-2. [TcpRoute2](https://github.com/GameXG/TcpRoute2) 代理核心   
+1. [ipt2socks](https://github.com/zfl9/ipt2socks) 透明代理   
+2. [TcpRoute2](https://github.com/GameXG/TcpRoute2) 代理流量转发器   
 3. [SmartDNS](https://github.com/pymumu/smartdns) 防止dns污染  
 
 云编译默认使用了[bcm53xx-generic](https://downloads.openwrt.org/snapshots/targets/bcm53xx/generic/)的工具链
-不会用云编译的可以编译好二进制文件分别命名为 ipt2socks tcproute2 smartdns 移动到/usr/bin目录并授予执行权限，再自行编译安装ipk
 
 必须包含有一组国外dns像8.8.8.8，主要是针对运营商返回 127.0.0.1 的污染，如 rfa.org jav321.com 和域名黑名单等功能。  
 其它的推荐添加使用运营商的dns服务
 
-*** 仅处理tcp流量，不会造成udp走代理出现的卡顿。目前发现谷歌市场无法下载是因为走了udp和tcp的高端口流量。 ***
+** 仅处理tcp流量，不会造成udp走代理出现的卡顿。目前发现谷歌市场无法下载是因为走了udp和tcp的高端口流量。等待tcproute2支持udp代理转发解决 **
 
 ## 计划
 * ~~增加自动编译ipk包~~  
