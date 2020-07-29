@@ -30,7 +30,8 @@
 * ~~透明代理替换成ipt2socks~~  
 * ~~开启运行时自动修改dns劫持流量到smartdns来处理~~
 * 添加Shadowsocks-libev与Obfs混淆插件
+* 添加Tor暗网访问功能
 * ~~优化Makefile文件代码~~
 ### 预览图
-<img src="https://github.com/yiguihai/luci-app-passwall/raw/master/view/1.png" alt="展示图" title="查看图片" />
+<img src="https://github.com/yiguihai/luci-app-passwall/raw/master/view/1.jpg" alt="展示图" title="查看图片" />
 <img src="https://github.com/yiguihai/luci-app-passwall/raw/master/view/2.png" alt="展示图" title="查看图片" />
