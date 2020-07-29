@@ -27,19 +27,6 @@ ipv4_lan="
   255.255.255.255/32
 "
 
-if [ -s /etc/config/passwall ]; then
-  switch=$(uci get passwall.@global[0].switch 2>/dev/null)
-  port=$(uci get passwall.@global[0].port)
-  ports=$(uci get passwall.@global[0].ports)
-  cores=$(cat /proc/cpuinfo|grep processor|wc -l)
-fi
-
-for i in $module_list; do
-  type $i >/dev/null 2>&1
-  [ $? -eq 127 ]&&exit $?
-  [ ! -x /usr/bin/$i ]&&chmod +x /usr/bin/$i 2>/dev/null
-done
-
 revert_dns()(
   uci del dhcp.@dnsmasq[0].server
   uci del dhcp.@dnsmasq[0].noresolv
@@ -176,6 +163,70 @@ start_up()(
   /etc/init.d/dnsmasq restart >/dev/null 2>&1
 )
 
+fast_check()(
+  for i in $module_list; do
+    pidof $i >/dev/null
+    if [ $? -ne 0 ]; then
+      echo -n "$i 未运行！"
+      exit $?
+    fi
+  done
+  iptables -w -t nat -C PREROUTING -j passwall 2>/dev/null
+  if [ $? -ne 0 ]; then
+    echo -n "没有规则引入表!"
+    exit $?
+  fi
+  num=$(iptables -n -t nat -L passwall --line-number|grep 'redir ports 1024\|match-set lan dst'|wc -l 2>/dev/null)
+  if [ ${num:=0} -lt 2 ]; then
+    echo -n "表规则数量异常!"
+    exit $?
+  fi
+)
+
+link_check()(
+  data=$(curl -o /dev/null -x socks5://127.0.0.1:1025 -s -m 10 -L -w '%{time_total};%{http_code}' $1)
+  if [ $? -eq 0 -a "$data" ]; then
+    code=${data#*;}
+    if [ ${code:=127} -eq 200 ]; then
+      echo -n ${data%;*}
+    fi
+  fi
+)
+
+from_address()(
+  if [ "$1" == "china" ]; then
+    url='https://myip.ipip.net'
+  elif [ "$1" == "foreign" ]; then
+    url='https://api.myip.la/cn?json'
+  else
+    exit $?
+  fi
+  data=$(curl -x socks5://127.0.0.1:1025 -s -m 10 -L -w ';%{http_code}' $url|sed ':a;N;s/\n/ /g;ta')
+  if [ $? -eq 0 -a "$data" ]; then
+    code=${data#*;}
+    if [ ${code:=127} -eq 200 ]; then
+      if [ "$1" == "china" ]; then
+        ip=$(echo $data|grep -oE '([0-9]+\.){3}[0-9]+?')
+        addr=${data#*\来\自\于\：}
+        if [[ "$addr" == *"台湾"* ]]; then
+          addr=${addr/中国/中华民国};
+         #addr=${addr/台湾省/台湾};
+        fi
+        echo -n "$ip,${addr%;*}"
+      elif [ "$1" == "foreign" ]; then
+        ip=$(jsonfilter -s $data -e '@.ip');
+        code=$(jsonfilter -s $data -e '@.location.country_code');
+        location=$(jsonfilter -s $data -e '@.location.city');
+        country=$(jsonfilter -s $data -e '@.location.country_name');
+        province=$(jsonfilter -s $data -e '@.location.province');
+        [ "$code" == "TW" ]&&country="中华民国"
+        echo -n "$ip,$country $province $location"
+      fi
+    fi
+  fi
+)
+
+
 shut_down()(
   for i in $module_list; do
     kill $(pidof $i) 2> /dev/null
@@ -201,6 +252,31 @@ ss_nat()(
     clear_rules
   fi
 );
+
+case $1 in
+  check)
+    fast_check
+  ;;
+  link)
+    link_check $2
+  ;;
+  from)
+    from_address $2
+  ;;
+esac
+
+if [ -s /etc/config/passwall ]; then
+  switch=$(uci get passwall.@global[0].switch 2>/dev/null)
+  port=$(uci get passwall.@global[0].port)
+  ports=$(uci get passwall.@global[0].ports)
+  cores=$(cat /proc/cpuinfo|grep processor|wc -l)
+fi
+
+for i in $module_list; do
+  type $i >/dev/null 2>&1
+  [ $? -eq 127 ]&&exit $?
+  [ ! -x /usr/bin/$i ]&&chmod +x /usr/bin/$i 2>/dev/null
+done
 
 stop()
 {

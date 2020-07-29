@@ -1,6 +1,6 @@
 -- 第一个为配置文件 默认路径是"/etc/config"+passwall
 -- m = Map("passwall", translate("PassWall Plus"), translate("On this page we can learn how the .lua work"))
-m = Map("passwall", translate("PassWall Plus"), translate("Self-use of the proxy script, I do not bear any consequences. <br/>Please visit https://github.com/yiguihai/luci-app-passwall-plus for more help"))
+m = Map("passwall", translate("PassWall Plus"))
 -- 第二个为配置文件具体项 global
 -- s = m:section(TypedSection, "global", translate("Script Configuration"))
 

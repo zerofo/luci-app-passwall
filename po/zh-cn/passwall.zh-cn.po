@@ -7,9 +7,6 @@ msgstr "首页"
 msgid "Server"
 msgstr "服务器"
 
-msgid "Self-use of the proxy script, I do not bear any consequences. <br/>Please visit https://github.com/yiguihai/luci-app-passwall-plus for more help"
-msgstr "自用的代理脚本，本人不承担任何后果。 <br/>请访问 https://github.com/yiguihai/luci-app-passwall-plus 获取更多帮助"
-
 msgid "Settings"
 msgstr "设置"
 

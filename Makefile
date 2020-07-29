@@ -12,7 +12,8 @@ define Package/$(PKG_NAME)
 	CATEGORY:=LuCI
 	SUBMENU:=3. Applications
 	TITLE:=LuCI Support for FuckGFW Bash Script
-	DEPENDS:=+bash +ipset +iptables-mod-tproxy +curl +jsonfilter +libpthread +libopenssl +luci-compat
+	DEPENDS:=+bash +ipset +curl +jsonfilter +libpthread +libopenssl +luci-compat
+# +iptables-mod-tproxy
 	PKGARCH:=all
 	MAINTAINER:=yiguihai
 endef
